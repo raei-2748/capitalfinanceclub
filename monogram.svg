@@ -1,0 +1,36 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minimal geometric monogram for CFC -->
+  <!-- Coordinate-based structure with clean lines -->
+  
+  <!-- C - Left Arc -->
+  <path d="M 35 30 L 35 90 M 35 30 L 55 30 M 35 90 L 55 90" 
+        stroke="white" 
+        stroke-width="1.5" 
+        stroke-linecap="square" 
+        fill="none"
+        opacity="0.95"/>
+  
+  <!-- F - Center -->
+  <path d="M 60 30 L 60 90 M 60 30 L 80 30 M 60 55 L 75 55" 
+        stroke="white" 
+        stroke-width="1.5" 
+        stroke-linecap="square" 
+        fill="none"
+        opacity="0.95"/>
+  
+  <!-- C - Right Arc (mirrored) -->
+  <path d="M 85 30 L 85 90 M 85 30 L 105 30 M 85 90 L 105 90" 
+        stroke="white" 
+        stroke-width="1.5" 
+        stroke-linecap="square" 
+        fill="none"
+        opacity="0.95"/>
+  
+  <!-- Subtle coordinate marks -->
+  <circle cx="35" cy="30" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="35" cy="90" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="60" cy="30" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="60" cy="90" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="85" cy="30" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="85" cy="90" r="1.5" fill="white" opacity="0.4"/>
+</svg>
