@@ -41,6 +41,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Extremely subtle fade-in on scroll for content sections
+// Note: Progressive enhancement class 'js' is added via inline script in <head>
 const observerOptions = {
     threshold: 0.15,
     rootMargin: '0px 0px -50px 0px'
@@ -55,34 +56,10 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all content sections
-document.querySelectorAll('.content-section').forEach(section => {
-    observer.observe(section);
-});
-
-// Section highlight on scroll (only for index page with sections)
-if (document.querySelectorAll('section[id]').length > 1) {
-    const navObserverOptions = {
-        threshold: 0.3,
-        rootMargin: '-80px 0px -60% 0px'
-    };
-
-    const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const sectionId = entry.target.getAttribute('id');
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    const href = link.getAttribute('href');
-                    if (href === `#${sectionId}` || href === `index.html#${sectionId}`) {
-                        // Don't override the page-level active state
-                        // Just for visual feedback on scroll
-                    }
-                });
-            }
-        });
-    }, navObserverOptions);
-
-    document.querySelectorAll('section[id]').forEach(section => {
-        navObserver.observe(section);
+// Observe all content sections (defensive check for page compatibility)
+const contentSections = document.querySelectorAll('.content-section');
+if (contentSections.length > 0) {
+    contentSections.forEach(section => {
+        observer.observe(section);
     });
 }

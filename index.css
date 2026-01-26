@@ -9,9 +9,15 @@
 }
 
 html {
-    scroll-behavior: smooth;
     scroll-padding-top: 80px;
     /* Ensures anchor links don't land behind fixed nav */
+}
+
+/* Enable smooth scrolling only when motion is preferred */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
 /* Color scheme variables - Dark Mode (default) */
@@ -58,28 +64,7 @@ html {
     }
 }
 
-/* Dark Mode - Explicit */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-primary: #1a1a1a;
-        --bg-secondary: rgba(255, 255, 255, 0.01);
-        --bg-tertiary: rgba(255, 255, 255, 0.03);
-        --text-primary: #ffffff;
-        --text-secondary: #e8e8e8;
-        --text-tertiary: #d0d0d0;
-        --text-muted: #c0c0c0;
-        --text-dimmed: #a0a0a0;
-        --text-faded: #888;
-        --text-subtle: #666;
-        --border-subtle: rgba(255, 255, 255, 0.04);
-        --border-medium: rgba(255, 255, 255, 0.06);
-        --border-strong: rgba(255, 255, 255, 0.1);
-        --border-accent: rgba(255, 255, 255, 0.15);
-        --border-hover: rgba(255, 255, 255, 0.3);
-        --grid-color: rgba(255, 255, 255, 0.02);
-        --nav-bg: rgba(26, 26, 26, 0.85);
-    }
-}
+/* Removed duplicate dark mode block - defaults at line 18 already cover this */
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -110,6 +95,20 @@ body::before {
     z-index: 0;
     opacity: 0.5;
 }
+
+/* Global accessibility: disable all animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 
 
 
@@ -252,20 +251,31 @@ p {
     text-align: center;
     transform: translateY(-5vh);
     /* Slightly above vertical center */
-    opacity: 0;
-    animation: fadeInHero 1.2s ease-out 0.3s forwards;
 }
 
-@keyframes fadeInHero {
-    from {
+/* Progressive enhancement: only animate when JS is available and motion is preferred */
+@media (prefers-reduced-motion: no-preference) {
+    html.js .hero-headline {
         opacity: 0;
-        transform: translateY(calc(-5vh + 20px));
+        animation: fadeInHero 1.2s ease-out 0.3s forwards;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(-5vh);
+    @keyframes fadeInHero {
+        from {
+            opacity: 0;
+            transform: translateY(calc(-5vh + 20px));
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(-5vh);
+        }
     }
+}
+
+/* Ensure content visible without JS or with reduced motion */
+html:not(.js) .hero-headline {
+    opacity: 1;
 }
 
 /* Institutional Descriptor */
@@ -279,15 +289,36 @@ p {
     margin-right: auto;
     font-weight: 300;
     letter-spacing: 0.01em;
-    opacity: 0;
-    animation: fadeInHero 1.2s ease-out 0.6s forwards;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html.js .institutional-descriptor {
+        opacity: 0;
+        animation: fadeInHero 1.2s ease-out 0.6s forwards;
+    }
+}
+
+html:not(.js) .institutional-descriptor {
+    opacity: 1;
 }
 
 /* Hero Actions */
 .hero-actions {
     margin-top: 32px;
-    opacity: 0;
-    animation: fadeInHero 1.2s ease-out 0.9s forwards;
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html.js .hero-actions {
+        opacity: 0;
+        animation: fadeInHero 1.2s ease-out 0.9s forwards;
+    }
+}
+
+html:not(.js) .hero-actions {
+    opacity: 1;
 }
 
 /* Orientation Band */
@@ -425,16 +456,24 @@ p {
     max-width: 720px;
 }
 
-/* Subtle fade in on scroll */
-.content-section {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+/* Subtle fade in on scroll - progressive enhancement */
+@media (prefers-reduced-motion: no-preference) {
+    html.js .content-section {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    html.js .content-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.content-section.visible {
+/* Ensure content visible without JS or with reduced motion */
+html:not(.js) .content-section {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
 /* ============================================
@@ -543,15 +582,7 @@ section+section {
    NEW COMPONENTS & LAYOUTS
    ============================================ */
 
-/* Buttons */
-.hero-actions {
-    margin-top: 48px;
-    display: flex;
-    gap: 24px;
-    justify-content: center;
-    opacity: 0;
-    animation: fadeInHero 1.2s ease-out 0.6s forwards;
-}
+/* Buttons - duplicate definition removed, consolidated above */
 
 .btn {
     display: inline-block;
