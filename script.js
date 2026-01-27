@@ -63,3 +63,30 @@ if (contentSections.length > 0) {
         observer.observe(section);
     });
 }
+
+// FAQ Accordion Functionality
+function initFAQAccordion() {
+    const accordionButtons = document.querySelectorAll('.faq-accordion-button');
+
+    accordionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+            // Toggle the current accordion
+            button.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Keyboard support (Enter and Space)
+        button.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                button.click();
+            }
+        });
+    });
+}
+
+// Initialize FAQ accordion if on FAQ page
+if (document.querySelector('.faq-accordion')) {
+    initFAQAccordion();
+}
