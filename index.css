@@ -1031,40 +1031,56 @@ section+section {
 }
 
 .faq-accordion-button {
+    /* Reset all button styles */
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px 28px;
+    gap: 20px;
+    padding: 20px 24px;
     background: transparent;
     border: none;
     cursor: pointer;
     text-align: left;
-    transition: all 0.2s ease;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: background-color 0.2s ease;
 }
 
 .faq-accordion-button:hover {
-    background: var(--bg-tertiary);
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .faq-accordion-button:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.faq-accordion-button:focus-visible {
     outline: 2px solid var(--border-accent);
     outline-offset: -2px;
 }
 
 .faq-question-text {
-    font-size: 18px;
+    flex: 1;
+    font-size: 17px;
     font-weight: 500;
     color: var(--text-primary);
     letter-spacing: -0.01em;
-    line-height: 1.4;
-    padding-right: 20px;
+    line-height: 1.5;
 }
 
 .faq-chevron {
     flex-shrink: 0;
+    width: 16px;
+    height: 16px;
     color: var(--text-muted);
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease;
 }
 
 .faq-accordion-button[aria-expanded="true"] .faq-chevron {
@@ -1072,24 +1088,25 @@ section+section {
 }
 
 .faq-accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
 }
 
 .faq-accordion-button[aria-expanded="true"]+.faq-accordion-content {
-    max-height: 1000px;
+    grid-template-rows: 1fr;
 }
 
 .faq-accordion-inner {
-    padding: 0 28px 28px 28px;
+    overflow: hidden;
 }
 
 .faq-accordion-inner p {
-    font-size: 16px;
-    line-height: 1.8;
+    font-size: 15px;
+    line-height: 1.7;
     color: var(--text-muted);
     margin: 0;
+    padding: 0 24px 20px 24px;
 }
 
 .faq-accordion-inner a {
@@ -1116,20 +1133,22 @@ section+section {
 }
 
 @media (max-width: 768px) {
+    .faq-accordion {
+        margin-bottom: 10px;
+    }
+
     .faq-accordion-button {
-        padding: 20px;
+        padding: 18px 20px;
+        gap: 16px;
     }
 
     .faq-question-text {
         font-size: 16px;
     }
 
-    .faq-accordion-inner {
-        padding: 0 20px 20px 20px;
-    }
-
     .faq-accordion-inner p {
-        font-size: 15px;
+        font-size: 14px;
+        padding: 0 20px 18px 20px;
     }
 
     .faq-chevron {
