@@ -63,6 +63,39 @@ html {
     --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #000000;
+        --bg-secondary: #0a0a0a;
+        --bg-tertiary: #111111;
+        --bg-elevated: #1a1a1a;
+
+        --text-primary: #ffffff;
+        --text-secondary: #f0f0f0;
+        --text-tertiary: #d0d0d0;
+        --text-muted: #a0a0a0;
+        --text-dimmed: #808080;
+        --text-faded: #606060;
+        --text-subtle: #404040;
+
+        --accent-blue: #3399ff;
+        --accent-blue-dim: #0073e6;
+        --accent-blue-subtle: rgba(51, 153, 255, 0.15);
+
+        --border-subtle: #1a1a1a;
+        --border-medium: #333333;
+        --border-strong: #ffffff;
+        --border-accent: #3399ff;
+        --border-hover: #ffffff;
+
+        --nav-bg: rgba(0, 0, 0, 0.85);
+    }
+
+    .logo {
+        filter: invert(1) brightness(2);
+    }
+}
+
 body {
     font-family: var(--font-body);
     background-color: var(--bg-primary);
@@ -1383,4 +1416,22 @@ section+section {
 :focus-visible {
     outline: 2px solid var(--accent-blue);
     outline-offset: 2px;
+}
+
+/* Decorative Bottomline */
+.decorative-bottomline {
+    font-family: var(--font-heading);
+    font-size: clamp(80px, 15vw, 240px);
+    font-weight: 700;
+    color: var(--text-primary);
+    opacity: 0.05;
+    text-align: center;
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    padding: 80px 0 40px;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
 }
